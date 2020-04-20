@@ -89,7 +89,7 @@ public class FileWriter {
         - parameter name: The String name of the filename you want to save.
         - parameter data: A Data object with the contents we want to write to disk,
      */
-    public func export(fileType: String, name: String = "maze", data: Data?) -> URL? {
+    @discardableResult public func export(fileType: String, name: String = "maze", data: Data?) -> URL? {
         var result: URL?
         if let documentURL = URL(string: "\(name).\(fileType)", relativeTo: URL(fileURLWithPath: computedPath)) {
             self.write(documentURL, data: data)
@@ -159,7 +159,7 @@ extension FileWriter {
         - parameter data: A Data object with the contents we want to write to disk
         - returns: An optional URL object.  If you have one, you should be able to get to that to get the image.
      */
-    public func export(type: ImageRenderEnum, name: String = "maze", data: Data?) -> URL? {
+    @discardableResult public func export(type: ImageRenderEnum, name: String = "maze", data: Data?) -> URL? {
                 return export(fileType: type.rawValue, name: name, data: data)
     }
 }
