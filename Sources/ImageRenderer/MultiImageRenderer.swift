@@ -18,13 +18,15 @@ public class MultiImageRenderer : ImageRenderer {
     /// instance variable to specify the color you want drawn in the background when creating the new image.
     public var size : CGSize
     private var context : CGContext? = nil
+    private var scale : CGFloat = 1.0
     
     /**
             Public initializer for creating a new ImageRenderer object.  If you want you can specify the default background color in this initializer.
      - parameter backgroundColor: An optional background color you can specify the color in the image when you create it.
      */
-    public init(_ size: CGSize, backgroundColor:(CGFloat, CGFloat, CGFloat, CGFloat)? = nil ) {
+    public init(_ size: CGSize, scale: CGFloat = 1.0, backgroundColor:(CGFloat, CGFloat, CGFloat, CGFloat)? = nil ) {
         self.size = size
+        self.scale = scale
         super.init(backgroundColor)
 
         self.context = Image.context( size: (Int(size.width), Int(size.height)), color: self.backgroundColor)
@@ -48,7 +50,7 @@ public class MultiImageRenderer : ImageRenderer {
             drawing(context)
             
             if let cgImage = context.makeImage() {
-                result = Image(cgImage: cgImage)
+                result = Image(cgImage: cgImage, scale: scale, orientation: .up)
             }
         }
         return result
