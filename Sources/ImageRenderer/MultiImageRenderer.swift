@@ -50,7 +50,11 @@ public class MultiImageRenderer : ImageRenderer {
             drawing(context)
             
             if let cgImage = context.makeImage() {
+                #if os(macOS)
+                result = Image(cgImage: cgImage)
+                #else
                 result = Image(cgImage: cgImage, scale: scale, orientation: .up)
+                #endif
             }
         }
         return result
