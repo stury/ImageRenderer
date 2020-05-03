@@ -8,10 +8,10 @@
 
 #if os(macOS)
     import Cocoa
-    typealias Color = NSColor
+    public typealias Color = NSColor
 #else // os(iOS) watchOS and tvOS
     import UIKit
-    typealias Color = UIColor
+    public typealias Color = UIColor
 #endif
 
 //{
@@ -19,7 +19,7 @@
 //    "colors":["#000000", "#FF0000", "#FFFF00", "#FF00FF", "#00FF00", "#FF00FF", "#00FFFF", "#0000FF"]
 //},
 
-extension Color {
+public extension Color {
     public convenience init?(hexString: String) {
         let r, g, b, a: CGFloat
         

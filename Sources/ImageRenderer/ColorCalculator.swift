@@ -7,7 +7,7 @@
 //
 import CoreGraphics
 
-class ColorCalculator {
+public class ColorCalculator {
     /// Colors that the pen can cycle through.
     let colors : [Color]
     /// Max Iterations per color.
@@ -18,7 +18,7 @@ class ColorCalculator {
         self.maxIterationsPerColor = maxIterationsPerColor
     }
     
-    convenience init(colors: [Color], maxIterations: Int) {
+    public convenience init(colors: [Color], maxIterations: Int) {
         self.init(colors: colors, maxIterationsPerColor: maxIterations/colors.count)
     }
     
@@ -47,17 +47,17 @@ class ColorCalculator {
         return min(Int(index/maxIterationsPerColor), colors.count-1)
     }
     
-    func color(for index: Int) -> Color {
+    public func color(for index: Int) -> Color {
         //print( "colorIndex:", colorIndex(for: index), "index:", index )
         return colors[colorIndex(for: index)]
     }
     
-    func colorString(red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
+    public func colorString(red: CGFloat, green: CGFloat, blue: CGFloat) -> String {
         return "(red: \(red), green: \(green), blue: \(blue))"
     }
 }
 
-class ColorLinearCalculator : ColorCalculator {
+public class ColorLinearCalculator : ColorCalculator {
 //    override init(colors: [UIColor], maxIterationsPerColor: Int) {
 //        // A NOTE:  We override this init method, because in the case where we are transitioning from one color
 //        // to another, the default calculation of maxIterationsPerColor passed in, will be wrong.  We actually need
@@ -70,7 +70,7 @@ class ColorLinearCalculator : ColorCalculator {
 //        super.init(colors: colors, maxIterationsPerColor: (maxIterationsPerColor*colors.count)/(colors.count-1))
 //    }
 //
-    convenience init(colors: [Color], maxIterations: Int) {
+    public convenience init(colors: [Color], maxIterations: Int) {
         let maxIterationsPerColor : Int
         if colors.count > 1 {
             maxIterationsPerColor = maxIterations/(colors.count-1)
@@ -82,7 +82,7 @@ class ColorLinearCalculator : ColorCalculator {
         self.init(colors: colors, maxIterationsPerColor: maxIterationsPerColor)
     }
 
-    override func color(for index: Int) -> Color {
+    public override func color(for index: Int) -> Color {
         let baseColorIndex = colorIndex(for: index)
         let sourceColor = colors[baseColorIndex]
         let destinationColor = colors[min(baseColorIndex+1, colors.count-1)]
@@ -112,7 +112,7 @@ class ColorLinearCalculator : ColorCalculator {
     }
 }
 
-class ColorSigmoidCalculator : ColorCalculator {
+public class ColorSigmoidCalculator : ColorCalculator {
 //    override init(colors: [UIColor], maxIterationsPerColor: Int) {
 //        // A NOTE:  We override this init method, because in the case where we are transitioning from one color
 //        // to another, the default calculation of maxIterationsPerColor passed in, will be wrong.  We actually need
@@ -124,7 +124,7 @@ class ColorSigmoidCalculator : ColorCalculator {
 //        // But for these transitions, I want to see colors.count-1 transitions.  That way all the transitions are evently distributed.
 //        super.init(colors: colors, maxIterationsPerColor: (maxIterationsPerColor*colors.count)/(colors.count-1))
 //    }
-    convenience init(colors: [Color], maxIterations: Int) {
+    public convenience init(colors: [Color], maxIterations: Int) {
         let maxIterationsPerColor : Int
         if colors.count > 1 {
             maxIterationsPerColor = maxIterations/(colors.count-1)
@@ -136,7 +136,7 @@ class ColorSigmoidCalculator : ColorCalculator {
         self.init(colors: colors, maxIterationsPerColor: maxIterationsPerColor)
     }
 
-    override func color(for index: Int) -> Color {
+    public override func color(for index: Int) -> Color {
         let baseColorIndex = colorIndex(for: index)
         let sourceColor = colors[baseColorIndex]
         let destinationColor = colors[min(baseColorIndex+1, colors.count-1)]

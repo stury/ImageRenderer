@@ -10,12 +10,12 @@
 //    "name": "Berimbolo",
 //    "colors": ["#02111D", "#037BB5", "#02111D"]
 //}
-struct Gradients : Codable {
-    let name : String
-    let colors : [String]
+public struct Gradients : Codable {
+    public let name : String
+    public let colors : [String]
     
     // Allow the user to get the actual UIColor...
-    func nativeColors() -> [Color] {
+    public func nativeColors() -> [Color] {
         var result = [Color]()
         
         for hexString in colors {
