@@ -1,6 +1,6 @@
 //
 //  Color.swift
-//  SpirographView
+//  ImageRenderer
 //
 //  Created by Scott Tury on 5/3/20.
 //  Copyright © 2020 Scott Tury. All rights reserved.
@@ -19,7 +19,11 @@
 //    "colors":["#000000", "#FF0000", "#FFFF00", "#FF00FF", "#00FF00", "#FF00FF", "#00FFFF", "#0000FF"]
 //},
 
+
+/// Simple public extension to NSColor/UIColor to provide simple converters from hex color strings to color objects, and back.
 public extension Color {
+    /// Simple initializer that takes a hexstring, and converts it into a NSColor/UIColor object.
+    /// - Parameter hexString: A String object starting with #, and consisting of 6 or 8 hexadecimal characters following.  This would correspond to #RRGGBB or #RRGGBBAA colors.
     public convenience init?(hexString: String) {
         let r, g, b, a: CGFloat
         
@@ -59,4 +63,42 @@ public extension Color {
         
         return nil
     }
+    
+    /// Simple method for converting a NSColor/UIColor object into a hexstring.
+    /// - Returns: String?  If nil was returned, then the color could not be converted to RGB.
+    /// Otherwise you'll have a hexcolor string specifying the RGB and possibly A components.
+    public func hexColor() -> String? {
+        var result : String? = nil
+        
+        var red : CGFloat = 0.0
+        var green : CGFloat = 0.0
+        var blue : CGFloat = 0.0
+        var alpha : CGFloat = 0.0
+        
+        #if os(macOS)
+        if let color = usingColorSpace(.deviceRGB) {
+            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            print( red*255.0 )
+            print( Int(red*255.0) )
+            if alpha == 1.0 {
+                result = String(format: "#%2.2x%2.2x%2.2x", Int(red*255.0), Int(green*255.0), Int(blue*255.0))
+            }
+            else {
+                result = String(format: "#%2.2x%2.2x%2.2x%2.2x", Int(red*255.0), Int(green*255.0), Int(blue*255.0), Int(alpha*255.0))
+            }
+        }
+        #else
+        if getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            if alpha == 1.0 {
+                result = String(format: "#%2.2x%2.2x%2.2x", Int(red*255.0), Int(green*255.0), Int(blue*255.0))
+            }
+            else {
+                result = String(format: "#%2.2x%2.2x%2.2x%2.2x", Int(red*255.0), Int(green*255.0), Int(blue*255.0), Int(alpha*255.0))
+            }
+        }
+        #endif
+        
+        return result
+    }
+
 }

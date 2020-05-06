@@ -1,3 +1,14 @@
+//
+//  ImageRenderer.swift
+//  ImageRenderer
+//
+//  A simple class to allow you o programatically create images without having to know
+//  all the ins and outs of Core Graphics.
+//
+//  Created by J. Scott Tury on 7/22/18.
+//  Copyright © 2018 self. All rights reserved.
+//
+
 import CoreGraphics
 import ImageIO
 

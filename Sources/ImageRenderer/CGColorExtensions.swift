@@ -1,3 +1,10 @@
+//
+//  CGColorExtensions.swift
+//  ImageRenderer
+//
+//  Created by Scott Tury on 9/13/18.
+//  Copyright © 2018 self. All rights reserved.
+//
 import Foundation
 import CoreGraphics
 #if os(iOS)

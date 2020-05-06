@@ -1,6 +1,6 @@
 //
 //  ColorCalculator.swift
-//  SpirographView
+//  ImageRenderer
 //
 //  Created by Scott Tury on 4/27/20.
 //  Copyright © 2020 Scott Tury. All rights reserved.

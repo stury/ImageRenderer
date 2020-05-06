@@ -1,6 +1,6 @@
 //
 //  Image.swift
-//  Mazes
+//  ImageRenderer
 //
 //  Created by J. Scott Tury on 7/22/18.
 //  Copyright © 2018 self. All rights reserved.

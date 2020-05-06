@@ -1,3 +1,16 @@
+//
+//  MultiImageRenderer.swift
+//  ImageRenderer
+//
+//  A simple class to allow you to programatically create images without having to know
+//  all the ins and outs of Core Graphics.  This one allows you to continuously draw to
+//  the same canvas over and over again, to slowly build up an image for the user.  A
+//  good example would be to draw a segment of a Spirograph on each call.  You get an
+//  Image back, and you can then use that to show the user your progress.
+//
+//  Created by J. Scott Tury on 4/16/20.
+//  Copyright © 2020 self. All rights reserved.
+//
 import Foundation
 import CoreGraphics
 import ImageIO

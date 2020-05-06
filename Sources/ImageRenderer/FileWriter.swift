@@ -1,6 +1,6 @@
 //
 //  FileWriter.swift
-//  Plant
+//  ImageRenderer
 //
 //  Created by Scott Tury on 10/2/19.
 //  Copyright © 2019 Scott Tury. All rights reserved.
