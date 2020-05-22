@@ -35,16 +35,24 @@ public class MultiImageRenderer : ImageRenderer {
     
     /**
             Public initializer for creating a new ImageRenderer object.  If you want you can specify the default background color in this initializer.
+     - parameter size: a CGSize specifying how large of an image you want to draw.
+     - parameter scale: An optional initializer to specify what sort of scale you are drawing in.  If you've got a hires iPhone, or mac monitor, use the screen scaling, and the image you get back will have the right settings.
      - parameter backgroundColor: An optional background color you can specify the color in the image when you create it.
+     - parameter image: An optional Image object to poulate the context with.  If specified, we will draw the image to the current context we create.
      */
-    public init(_ size: CGSize, scale: CGFloat = 1.0, backgroundColor:(CGFloat, CGFloat, CGFloat, CGFloat)? = nil ) {
+    public init(_ size: CGSize, scale: CGFloat = 1.0, backgroundColor:(CGFloat, CGFloat, CGFloat, CGFloat)? = nil, image: Image? = nil ) {
         self.size = size
         self.scale = scale
         super.init(backgroundColor)
 
         self.context = Image.context( size: (Int(size.width), Int(size.height)), color: self.backgroundColor)
+        
+        // If we were asked to populate the context with an image, do that now!
+        if let context = self.context, let image = image, let cgImage = image.cgImage {
+            context.draw(cgImage, in: CGRect(x: 0.0, y: 0.0, width: size.width, height:size.height), byTiling: false)
+        }
     }
-    
+
     deinit {
         self.context = nil
     }
