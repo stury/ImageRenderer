@@ -1,7 +1,7 @@
 # ImageRenderer
 By Scott Tury
 
-This is a simple library for wrapping up the logic needed for rendering graphics programatically into an `Image`.  An `Image`, as discusses below, will be either an `NSImage` on `macOS`, or a `UIImage` on `iOS`/`tvOS`/`watchOS`.  So the end user doesn't need to know all the low level `CGGraphcs` details in order to create an image. 
+This is a simple library for wrapping up the logic needed for rendering graphics programatically into an `Image`.  An `Image`, as discussed below, will be either an `NSImage` on `macOS`, or a `UIImage` on `iOS`/`tvOS`/`watchOS`.  So the end user doesn't need to know all the low level `CGGraphcs` details in order to create an image. 
 
 ## ImageRenderer
 
