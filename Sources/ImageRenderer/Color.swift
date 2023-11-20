@@ -24,7 +24,7 @@
 public extension Color {
     /// Simple initializer that takes a hexstring, and converts it into a NSColor/UIColor object.
     /// - Parameter hexString: A String object starting with #, and consisting of 6 or 8 hexadecimal characters following.  This would correspond to #RRGGBB or #RRGGBBAA colors.
-    public convenience init?(hexString: String) {
+    convenience init?(hexString: String) {
         let r, g, b, a: CGFloat
         
         if hexString.hasPrefix("#") {
@@ -64,10 +64,30 @@ public extension Color {
         return nil
     }
     
+    /// Simple convenience initializer to  take an integer, and split it into a RGB color value.
+    /// - Parameter hexcolor: Integer, usually specified as a hex value in code: 0xffccdd.  We will split this up into RGB components.
+    convenience init(_ hexcolor: Int) {
+            // c6ffdd → #fbd786 → #f7797d
+        if hexcolor > 0xFF0000 || hexcolor < 0 {
+            // Assume the color is RGBA
+            self.init(red: CGFloat((hexcolor & 0xFF000000) >> 24)/256.0,
+                      green: CGFloat((hexcolor & 0x00FF0000)>>16)/256.0,
+                      blue: CGFloat((hexcolor & 0x0000FF00)>>8)/256.0,
+                      alpha: CGFloat(hexcolor & 0x000000FF)/256.0)
+        }
+        else {
+            // Assume just RGB
+            self.init(red: CGFloat(((hexcolor & 0xFF0000) >> 16))/256.0,
+                      green: CGFloat(((hexcolor & 0x00FF00)>>8))/256.0,
+                      blue: CGFloat(hexcolor & 0x0000FF)/256.0,
+                      alpha: 1.0)
+        }
+    }
+    
     /// Simple method for converting a NSColor/UIColor object into a hexstring.
     /// - Returns: String?  If nil was returned, then the color could not be converted to RGB.
     /// Otherwise you'll have a hexcolor string specifying the RGB and possibly A components.
-    public func hexColor() -> String? {
+    func hexColor() -> String? {
         var result : String? = nil
         
         var red : CGFloat = 0.0
